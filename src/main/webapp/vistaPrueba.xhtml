@@ -13,108 +13,95 @@
 
     <ui:define name="content">
         <h:form id="form" prependId="false">
-            <p:messages  id="messages"  closable="true" showDetail="true" escape="false"/> 
-            <div class="row">
-                <div class="form-group clearfix">
-                    <label class="col-md-4 control-label">Cantidad De Cortes <span class="req">*</span></label>
-                    <div class="col-md-12">
-                        <div class="input-group">
-                            <p:inputText id="cor" class="form-control" type="number" onblur="validarCampo(this.id)" onkeyup="validarCampo(this.id)" maxlength="2" value="#{controllerApp.cantidadCortes}">
-                            </p:inputText> 
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group clearfix">
-                    <label class="col-md-4 control-label">Cantidad De Asignaturas <span class="req">*</span></label>
-                    <div class="col-md-12">
-                        <div class="input-group">
-                            <p:inputText id="asi" class="form-control" type="number" onblur="validarCampo(this.id)" onkeyup="validarCampo(this.id)"   maxlength="2" value="#{controllerApp.cantidadAsignaturas}" validatorMessage="No Cumple Con La Expresion">
-                            </p:inputText>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <p:commandButton value="Ingresar Valores"   update="toUpdate toUpdateTable" actionListener="#{controllerApp.cargar}" styleClass="btn btn-info"  ></p:commandButton>
-
-            <p:outputPanel id="toUpdate">
-                <p:panel id="lista" toggleOrientation="vertical" toggleable="true" header="Configuración" rendered="#{controllerApp.mostrarPanel}">
-                    <p:outputLabel value="Asignaturas" style="font-size: 22px ;"></p:outputLabel><br/>
-                    <ui:repeat value="#{controllerApp.listaAsignaturas}" var="asi">
-                        <div class="row">
-                            <div class="form-group clearfix">
-                                <label class="col-md-4 control-label">#{asi.nombreAsignatura}<span class="req">*</span></label>
-                                <div class="col-md-12">
-                                    <div class="input-group">
-                                        <p:inputText class="form-control" type="number" maxlength="2" value="#{asi.cantidadCredito}">
-                                            <!--<f:validateRegex pattern="^([1-9]){1,2}" />-->
-                                        </p:inputText><br/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </ui:repeat>
-
-                    <p:outputLabel value="Cortes" style="font-size: 22px ;"></p:outputLabel><br/>
-                    <ui:repeat value="#{controllerApp.listaCortes}" var="cor">
-                        <div class="row">
-                            <div class="form-group clearfix">
-                                <label class="col-md-4 control-label">#{cor.nombreCorte}<span class="req">*</span></label>
-                                <div class="col-md-12">
-                                    <div class="input-group">
-                                        <p:inputText class="form-control" maxlength="3"  value="#{cor.porcentajeCorte}"/><br/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </ui:repeat>
-                    <p:commandButton value="Cargar Tabla" styleClass="btn btn-info" action="#{controllerApp.mostrarTablaAction()}" update="toUpdateTable"/>
-                </p:panel>
-            </p:outputPanel>
-
-            <p:outputPanel id="toUpdateTable">
-                <p:dataTable var="rowName" value="#{controllerApp.listaAsignaturas}" rendered="#{controllerApp.mostrarPanel}"  widgetVar="tabla" id="tabla" rowIndexVar="rowIdx">
-                    <p:column headerText="" styleClass="ui-widget-header">
-                        <h:outputText value="#{rowName.nombreAsignatura}"/>
-                    </p:column>
-
-                    <p:columns var="columnName" value="#{controllerApp.listaCortes}" headerText="#{columnName.nombreCorte}"
-                               columnIndexVar="colIdx">
-                        <ui:repeat value="#{controllerApp.transicion[rowIdx][colIdx]}" var="data">
-                            <p:panel>
-                                <p:inputText id="id" class="form-control input-double" disabled="#{controllerApp.mostrarTabla}" onblur="validarCampoTabla(this.id)" onkeyup="validarCampoTabla(this.id)"  maxlength="4" value="#{data}">
+            <div id="page">
+                <p:messages  id="messages"  closable="true" showDetail="true" escape="false"/> 
+                <div class="row">
+                    <div class="form-group clearfix">
+                        <label class="col-md-4 control-label">Cantidad De Asignaturas <span class="req">*</span></label>
+                        <div class="col-md-12">
+                            <div class="input-group">
+                                <p:inputText id="asi" class="form-control" type="number" onblur="validarCampo(this.id)" onkeyup="validarCampo(this.id)"   maxlength="2" value="#{controllerApp.cantidadAsignaturas}" validatorMessage="No Cumple Con La Expresion">
                                 </p:inputText>
-                            </p:panel>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group clearfix">
+                        <label class="col-md-4 control-label">Cantidad De Cortes <span class="req">*</span></label>
+                        <div class="col-md-12">
+                            <div class="input-group">
+                                <p:inputText id="cor" class="form-control"  type="number" onblur="validarCampo(this.id)" onkeyup="validarCampo(this.id)" maxlength="2" value="#{controllerApp.cantidadCortes}">
+                                </p:inputText> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p:commandButton value="Ingresar Valores" onclick="ComponentForm.initLoadingDiv('#page')" oncomplete="ComponentForm.stopLoadingDiv('#page')" 
+                                 update="toUpdate messages toUpdateTable" 
+                                 actionListener="#{controllerApp.cargar}" styleClass="btn btn-info"  ></p:commandButton>
+
+                <p:outputPanel id="toUpdate">
+                    <p:panel id="lista" widgetVar="lista" toggleOrientation="vertical" toggleable="true" header="Configuración" rendered="#{controllerApp.mostrarPanel}">
+                        <p:outputLabel value="Asignaturas" style="font-size: 22px ;"></p:outputLabel><br/>
+                        <ui:repeat value="#{controllerApp.listaAsignaturas}" var="asi">
+                            <div class="row">
+                                <div class="form-group clearfix">
+                                    <label class="col-md-4 control-label">#{asi.nombreAsignatura}<span class="req">*</span></label>
+                                    <div class="col-md-12">
+                                        <div class="input-group">
+                                            <p:inputText class="form-control" type="number" onblur="validarCampo(this.id)" onkeyup="validarCampo(this.id)" maxlength="2" value="#{asi.cantidadCredito}">
+                                            </p:inputText><br/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </ui:repeat>
-                    </p:columns>
-                </p:dataTable>
-            </p:outputPanel>
+
+                        <p:outputLabel value="Cortes" style="font-size: 22px ;"></p:outputLabel><br/>
+                        <ui:repeat value="#{controllerApp.listaCortes}" id="listaCortes"  var="cor">
+                            <div class="row">
+                                <div class="form-group clearfix">
+                                    <label class="col-md-4 control-label">#{cor.nombreCorte}<span class="req">*</span></label>
+                                    <div class="col-md-12">
+                                        <div class="input-group">
+                                            <p:inputText class="form-control" onblur="validarCampoCorte(this.id)" onkeyup="validarCampoCorte(this.id)"  disabled="#{controllerApp.listaCortes.size()-1==cor.idCorte?true:false}" maxlength="3" type="number"  value="#{cor.porcentajeCorte}">
+                                                <p:ajax event="change" update="@widgetVar(lista)" listener="#{controllerApp.validarPorcentajeCortes}"/>
+                                            </p:inputText><br/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ui:repeat>
+                        <p:commandButton value="Habilitar Campos" styleClass="btn btn-info" action="#{controllerApp.mostrarTablaAction()}" update="toUpdateTable calcular"/>
+                    </p:panel>
+                </p:outputPanel>
+
+                <p:outputPanel id="toUpdateTable">
+                    <p:dataTable var="rowName" value="#{controllerApp.listaAsignaturas}" rendered="#{controllerApp.mostrarPanel}"  widgetVar="tabla" id="tabla" rowIndexVar="rowIdx">
+                        <p:column headerText="" styleClass="ui-widget-header">
+                            <h:outputText value="#{rowName.nombreAsignatura}"/>
+                        </p:column>
+
+                        <p:columns var="columnName" value="#{controllerApp.listaCortes}" headerText="#{columnName.nombreCorte}"
+                                   columnIndexVar="colIdx">
+                            <ui:repeat value="#{controllerApp.objeto.transicion[rowIdx][colIdx]}" var="data">
+                                <p:panel>
+                                    <center>
+                                        <p:inputText   disabled="true"  class="form-control input-double text-center"  rendered="#{controllerApp.mostrarTabla}"  maxlength="4" value="#{data}"></p:inputText>
+                                        <p:inputText id="id#{rowIdx}#{colIdx}" class="form-control input-tabla text-center"  rendered="#{!controllerApp.mostrarTabla}" onblur="validarCampoTabla(this.id)" onkeyup="validarCampoTabla(this.id)"  maxlength="3" value="#{controllerApp.objeto.transicion[rowIdx][colIdx]}"> </p:inputText>
+                                    </center>
+                                </p:panel>
+                            </ui:repeat>
+                        </p:columns>
+                        <p:column rendered="#{controllerApp.mostrarDefinitiva}" headerText="Definitiva" styleClass="ui-widget-header">
+                            <center> <h:outputText value="#{controllerApp.objeto.definitiva[rowIdx]}"/></center>
+                        </p:column>
+
+                    </p:dataTable>
+                    <p:commandButton value="Calcular" id="calcular" rendered="#{!controllerApp.mostrarTabla}" styleClass="btn btn-info" actionListener="#{controllerApp.calcular}" update="toUpdateTable"/>
+                </p:outputPanel>
+            </div>
         </h:form>
     </ui:define>
-    <script>
-
-        function validarCampo(idd) {
-            var valor = document.getElementById(idd).value;
-            alert(valor);
-            var longitud = valor.length;
-            var pattern = /^([1-9]){1,2}/;
-            if (!(pattern.test(valor))) {
-                valor = valor.substr(0, (longitud - 1));
-                document.getElementById(idd).value = valor;
-            }
-        }
-
-        function validarCampoTabla(idd) {
-            var valor = $('.input-tabla');
-            var longitud = valor.length;
-            var pattern = /^(\d){1}(\.\d{0,2})?$/;
-            if (!(pattern.test(valor))) {
-                valor = valor.substr(0, (longitud - 1));
-                document.getElementById(idd).value = valor;
-            }
-        }
-    </script>
-
     <ui:define name="bottom">
         <div class="clearfix text-right">
             <small>Los campos con <span class="req">*</span> son obligatorios.</small>
