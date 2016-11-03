@@ -57,4 +57,10 @@ h2 {
     margin-bottom: 10px;
     border-bottom: 1px dotted #333399;
 }
+.panel-input div.ui-panel-content , .input-double, tbody.tabla_data div.ui-datatable tbody td{
+    padding: 0px;
+}
 
+.ui-datatable tbody td{
+    padding: 0px;
+}

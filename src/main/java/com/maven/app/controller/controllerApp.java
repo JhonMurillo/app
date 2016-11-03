@@ -42,6 +42,8 @@ public class controllerApp implements Serializable {
     private int cantCortes;
     private int cantAsignatura;
     private boolean corteTecnologico;
+    private Double promedio;
+    private int pro;
 
     @PostConstruct
     public void init() {
@@ -59,10 +61,14 @@ public class controllerApp implements Serializable {
         mostrarPanel = false;
         mostrarDefinitiva = false;
         corteTecnologico = false;
+        promedio = 0D;
+        pro = 0;
     }
 
     public void cargar() {
         try {
+            promedio = 0D;
+            pro = 0;
             if (cantidadAsignaturas.isEmpty() || cantidadAsignaturas == null || "0".equals(cantidadAsignaturas)) {
                 mostrarPanel = false;
                 mostrarDefinitiva = false;
@@ -144,6 +150,8 @@ public class controllerApp implements Serializable {
 
     public void calcular(ActionEvent event) {
         try {
+            pro = 1;
+            promedio = 0D;
             DecimalFormat decimal = new DecimalFormat("#.#");
             mostrarDefinitiva = true;
             Double[] definitiva = new Double[listaAsignaturas.size()];
@@ -156,7 +164,9 @@ public class controllerApp implements Serializable {
                     definitiva[listaAsignatura.getIdAsignatura()] = notaDefinitiva;
                     objeto.setDefinitiva(definitiva);
                 }
+                promedio += objeto.getDefinitiva()[listaAsignatura.getIdAsignatura()] * listaAsignatura.getCantidadCredito();
             }
+
         } catch (Exception e) {
             e.printStackTrace();
             FacesContext.getCurrentInstance().addMessage("messages", new FacesMessage(FacesMessage.SEVERITY_FATAL, null, "Ha ocurrido un error interno, por favor comuniquese con el administrador del sistemas"));
@@ -312,6 +322,22 @@ public class controllerApp implements Serializable {
 
     public void setCorteTecnologico(boolean corteTecnologico) {
         this.corteTecnologico = corteTecnologico;
+    }
+
+    public Double getPromedio() {
+        return promedio;
+    }
+
+    public void setPromedio(Double promedio) {
+        this.promedio = promedio;
+    }
+
+    public int getPro() {
+        return pro;
+    }
+
+    public void setPro(int pro) {
+        this.pro = pro;
     }
 
 }

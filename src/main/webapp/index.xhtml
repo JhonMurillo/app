@@ -116,10 +116,10 @@
                         <p:columns var="columnName" value="#{controllerApp.listaCortes}" headerText="#{columnName.nombreCorte}"
                                    columnIndexVar="colIdx">
                             <ui:repeat value="#{controllerApp.objeto.transicion[rowIdx][colIdx]}" var="data">
-                                <p:panel>
+                                <p:panel class="panel-input">
                                     <center>
                                         <p:inputText   disabled="true"  styleClass="form-control input-double text-center"  rendered="#{controllerApp.mostrarTabla}"  maxlength="4" value="#{data}"></p:inputText>
-                                        <p:inputText id="id#{rowIdx}#{colIdx}" styleClass="form-control input-tabla text-center"  rendered="#{!controllerApp.mostrarTabla}" onblur="validarCampoTabla(this.id)" onkeyup="validarCampoTabla(this.id)"  maxlength="3" value="#{controllerApp.objeto.transicion[rowIdx][colIdx]}"> </p:inputText>
+                                        <p:inputText id="id#{rowIdx}#{colIdx}"  styleClass="form-control input-double text-center"  rendered="#{!controllerApp.mostrarTabla}" onblur="validarCampoTabla(this.id)" onkeyup="validarCampoTabla(this.id)"  maxlength="3" value="#{controllerApp.objeto.transicion[rowIdx][colIdx]}"> </p:inputText>
                                     </center>
                                 </p:panel>
                             </ui:repeat>
@@ -127,6 +127,13 @@
                         <p:column rendered="#{controllerApp.mostrarDefinitiva}" headerText="Definitiva" styleClass="ui-widget-header">
                             <center><label class="label #{controllerApp.objeto.definitiva[rowIdx] >= 3.0 ?'label-success':'label-danger'}"> #{controllerApp.objeto.definitiva[rowIdx]} </label></center>
                         </p:column>
+
+                        <p:columnGroup type="footer">
+                            <p:row>
+                                <p:column colspan="#{controllerApp.listaCortes.size() + controllerApp.pro}" style="text-align:right" footerText="Promedio De Notas" />
+                                <center><label class="label #{controllerApp.promedio >= 3.0 ?'label-success':'label-danger'}"> <p:column footerText="#{controllerApp.promedio}" /></label></center>
+                            </p:row>
+                        </p:columnGroup>
 
                     </p:dataTable>
                 </div>
