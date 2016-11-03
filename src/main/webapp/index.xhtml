@@ -70,7 +70,7 @@
                                 <div class="row">
                                     <ui:repeat value="#{controllerApp.listaAsignaturas}" var="asi">
                                         <div class="col-md-4">
-                                            <label class="col-md-4 control-label">#{asi.nombreAsignatura}<span class="req">*</span></label>
+                                            <label class="col-md-5 control-label">#{asi.nombreAsignatura}<span class="req">*</span></label>
                                             <div >
                                                 <p:inputText styleClass="form-control"  type="number" onblur="validarCampo(this.id)" onkeyup="validarCampo(this.id)" maxlength="2" value="#{asi.cantidadCredito}"/>
                                             </div>

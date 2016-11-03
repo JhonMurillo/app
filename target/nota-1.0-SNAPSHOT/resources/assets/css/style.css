@@ -62,23 +62,23 @@ body {
 }
 .login-icon {
     height: 60px;
-width: 60px;
-padding: 13px;
-border-radius: 50%;
-font-size: 30px;
-margin-bottom: 20px;
-color: #fff;
-text-align: center;
-cursor:pointer;
-background-color:#F0677C;
--webkit-border-radius:50%;
+    width: 60px;
+    padding: 13px;
+    border-radius: 50%;
+    font-size: 30px;
+    margin-bottom: 20px;
+    color: #fff;
+    text-align: center;
+    cursor:pointer;
+    background-color:#F0677C;
+    -webkit-border-radius:50%;
     -moz-border-radius:50%;
 }
 /* =============================================================
    HEADER SECTION STYLES
  ============================================================ */
 header {
-    background-color: #F0677C;
+    background-color: #27348a;
     color: #fff;
     padding: 10px;
     text-align: right;
@@ -117,47 +117,47 @@ header {
     margin-top: 10px;
 }
 
-    .user-settings-wrapper li {
-        display: inline-block;
-    }
+.user-settings-wrapper li {
+    display: inline-block;
+}
 
-    .user-settings-wrapper .dropdown-settings {
-        width: 200px;
-        padding: 10px;
-    }
+.user-settings-wrapper .dropdown-settings {
+    width: 200px;
+    padding: 10px;
+}
 
-    .user-settings-wrapper .nav > li > a:hover,.user-settings-wrapper .nav > li > a:focus {
-        text-decoration: none;
-        background-color: #C36464!important;
-    }
+.user-settings-wrapper .nav > li > a:hover,.user-settings-wrapper .nav > li > a:focus {
+    text-decoration: none;
+    background-color: #C36464!important;
+}
 
-    .user-settings-wrapper img {
-        height: 64px;
-        width: 64px;
-        border: 1px solid #000000;
-    }
+.user-settings-wrapper img {
+    height: 64px;
+    width: 64px;
+    border: 1px solid #000000;
+}
 
-    .user-settings-wrapper .dropdown-menu {
-        margin: 0px;
-        border-radius: 0px!important;
-        -moz-border-radius: 0px!important;
-        -webkit-border-radius: 0px!important;
-    }
+.user-settings-wrapper .dropdown-menu {
+    margin: 0px;
+    border-radius: 0px!important;
+    -moz-border-radius: 0px!important;
+    -webkit-border-radius: 0px!important;
+}
 
-    .user-settings-wrapper .btn {
-        border-radius: 0px!important;
-        -moz-border-radius: 0px!important;
-        -webkit-border-radius: 0px!important;
-    }
+.user-settings-wrapper .btn {
+    border-radius: 0px!important;
+    -moz-border-radius: 0px!important;
+    -webkit-border-radius: 0px!important;
+}
 
-    .user-settings-wrapper .media-heading {
-        padding-top: 10px;
-    }
+.user-settings-wrapper .media-heading {
+    padding-top: 10px;
+}
 
 /* MENU LINKS SECTION*/
 
 .menu-section {
-    background-color: #3D3D3D;
+    background-color: #ffffff;
 }
 
 #menu-top a {
@@ -181,7 +181,7 @@ header {
 }
 
 .navbar-inverse {
-    background-color: #C36464;
+    background-color: #ffffff;
     border-color: transparent;
 }
 
@@ -200,13 +200,13 @@ footer {
     padding: 10px;
     color: #fff;
     font-size: 12px;
-    background-color: #C36464;
+    background-color: #27348a;
 }
 
-    footer a, footer a:hover {
-        color: #fff;
-        text-decoration: none;
-    }
+footer a, footer a:hover {
+    color: #fff;
+    text-decoration: none;
+}
 
 /*==============================================
     DASHBOARD  STYLES    
@@ -251,9 +251,9 @@ footer {
     margin-bottom: 50px;
 }
 
-    .dashboard-div-wrapper .progress {
-        height: 2px;
-    }
+.dashboard-div-wrapper .progress {
+    height: 2px;
+}
 
 /* NOTICE BOARD */
 
@@ -274,16 +274,16 @@ footer {
     border-bottom: 1px solid #E5E5E5;
 }
 
-    .notice-board li span {
-        margin-right: 10px;
-        border: 1px solid #DBDBDB;
-        padding: 5px;
-    }
+.notice-board li span {
+    margin-right: 10px;
+    border: 1px solid #DBDBDB;
+    padding: 5px;
+}
 
-    .notice-board li a, li a:hover {
-        text-decoration: none;
-        color: #000;
-    }
+.notice-board li a, li a:hover {
+    text-decoration: none;
+    color: #000;
+}
 
 /* SOCIAL BUTTONS */
 .btn-social {
@@ -291,11 +291,11 @@ footer {
     opacity: 0.8;
 }
 
-    .btn-social:hover {
-        color: white;
-        opacity: 1;
-        text-decoration: none;
-    }
+.btn-social:hover {
+    color: white;
+    opacity: 1;
+    text-decoration: none;
+}
 
 .btn-facebook {
     background-color: #3b5998;
