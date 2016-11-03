@@ -15,12 +15,12 @@ public class Corte implements Serializable {
 
     private int idCorte;
     private String nombreCorte;
-    private Float porcentajeCorte;
+    private int porcentajeCorte;
 
     public Corte() {
     }
 
-    public Corte(int idCorte, String nombreCorte, Float porcentajeCorte) {
+    public Corte(int idCorte, String nombreCorte, int porcentajeCorte) {
         this.idCorte = idCorte;
         this.nombreCorte = nombreCorte;
         this.porcentajeCorte = porcentajeCorte;
@@ -30,7 +30,7 @@ public class Corte implements Serializable {
         this.nombreCorte = nombreCorte;
     }
 
-    public Corte(String nombreCorte, Float porcentajeCorte) {
+    public Corte(String nombreCorte, int porcentajeCorte) {
         this.nombreCorte = nombreCorte;
         this.porcentajeCorte = porcentajeCorte;
     }
@@ -43,11 +43,11 @@ public class Corte implements Serializable {
         this.nombreCorte = nombreCorte;
     }
 
-    public Float getPorcentajeCorte() {
+    public int getPorcentajeCorte() {
         return porcentajeCorte;
     }
 
-    public void setPorcentajeCorte(Float porcentajeCorte) {
+    public void setPorcentajeCorte(int porcentajeCorte) {
         this.porcentajeCorte = porcentajeCorte;
     }
 
