@@ -72,7 +72,7 @@
                                         <div class="col-md-4">
                                             <label class="col-md-4 control-label">#{asi.nombreAsignatura}<span class="req">*</span></label>
                                             <div >
-                                                <p:inputText class="form-control"  type="number" onblur="validarCampo(this.id)" onkeyup="validarCampo(this.id)" maxlength="2" value="#{asi.cantidadCredito}"/>
+                                                <p:inputText styleClass="form-control"  type="number" onblur="validarCampo(this.id)" onkeyup="validarCampo(this.id)" maxlength="2" value="#{asi.cantidadCredito}"/>
                                             </div>
                                         </div>
                                     </ui:repeat>
@@ -83,7 +83,7 @@
                                         <div class="col-md-4">
                                             <label class="col-md-4 control-label">#{cor.nombreCorte}<span class="req">*</span></label>
                                             <div >
-                                                <p:inputText class="form-control" disabled="#{controllerApp.listaCortes.size()-1 ==cor.idCorte or controllerApp.corteTecnologico?true:false}" maxlength="3" type="number"  value="#{cor.porcentajeCorte}">
+                                                <p:inputText styleClass="form-control" disabled="#{controllerApp.listaCortes.size()-1 ==cor.idCorte or controllerApp.corteTecnologico?true:false}" maxlength="3" type="number"  value="#{cor.porcentajeCorte}">
                                                     <p:ajax event="change" update="@widgetVar(lista)" listener="#{controllerApp.validarPorcentajeCortes}"/>
                                                 </p:inputText><br/>
                                             </div>
