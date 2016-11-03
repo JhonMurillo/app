@@ -1,10 +1,150 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Start Page</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
-</html>
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./WEB-INF/prueba.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="top">
+
+    </ui:define>
+
+    <ui:define name="title-inicial">
+        Inicio
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form id="form" prependId="false">
+            <p:messages  id="messages"  closable="true" showDetail="true" escape="false"/> 
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-info">
+                        El corte tecnologico son 3 cortes donde el primero y el segundo tienen un porcentaje del 30% y el tercero un procentaje del 40%.
+                    </div>
+                    <div class="alert alert-success">
+                        Este software es para calcular el promedio de las notas.
+                    </div>
+                    <hr />
+                    <div class="Compose-Message">               
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+                                Calculadora De Cortes 
+                            </div>
+                            <div class="panel-body">
+                                <label>Cantidad De Asignatura *</label>
+                                <p:inputText id="asi" class="form-control" type="number" onblur="validarCampo(this.id)" onkeyup="validarCampo(this.id)"   maxlength="2" value="#{controllerApp.cantidadAsignaturas}" validatorMessage="No Cumple Con La Expresion">
+                                </p:inputText>
+                                <label>Cantidad De Cortes *</label>
+                                <p:inputText id="cor" class="form-control" disabled="#{controllerApp.corteTecnologico}" type="number" onblur="validarCampo(this.id)" onkeyup="validarCampo(this.id)" maxlength="2" value="#{controllerApp.cantidadCortes}">
+                                </p:inputText> 
+                                <label>¿Corte Tecnologico?</label>
+                                <p:selectBooleanButton value="#{controllerApp.corteTecnologico}" onLabel="Si" 
+                                                       offLabel="No" onIcon="ui-icon-check"
+                                                       offIcon="ui-icon-close"
+                                                       valueChangeListener="#{controllerApp.corteTecnologicoCC}">
+                                    <p:ajax event="change" update="@widgetVar(lista) cor toUpdate toUpdateTable" listener="#{controllerApp.corteTecnologicoC}"/>
+                                </p:selectBooleanButton>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p:commandButton value="Ingresar Valores"  
+                             onclick="PF('dlg3').show();"  
+                             oncomplete="PF('dlg3').hide();" 
+                             update="toUpdate toUpdateTable messages" 
+                             action="#{controllerApp.cargar}" 
+                             styleClass="btn btn-info" />
+
+            <p:outputPanel id="toUpdate">
+                <p:panel id="lista" widgetVar="lista" rendered="#{controllerApp.mostrarPanel}">
+                    <div class="Compose-Message">               
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+                                Configuración
+                            </div>
+                            <div class="panel-body">
+                                <p:outputLabel value="Asignaturas" style="font-size: 22px ;"></p:outputLabel><br/>
+                                <div class="row">
+                                    <ui:repeat value="#{controllerApp.listaAsignaturas}" var="asi">
+                                        <div class="col-md-4">
+                                            <label class="col-md-4 control-label">#{asi.nombreAsignatura}<span class="req">*</span></label>
+                                            <div >
+                                                <p:inputText class="form-control" type="number" onblur="validarCampo(this.id)" onkeyup="validarCampo(this.id)" maxlength="2" value="#{asi.cantidadCredito}"/>
+                                            </div>
+                                        </div>
+                                    </ui:repeat>
+                                </div>
+                                <p:outputLabel value="Cortes" style="font-size: 22px ;"></p:outputLabel><br/>
+                                <div class="row">
+                                    <ui:repeat value="#{controllerApp.listaCortes}" id="listaCortes"  var="cor">
+                                        <div class="col-md-4">
+                                            <label class="col-md-4 control-label">#{cor.nombreCorte}<span class="req">*</span></label>
+                                            <div >
+                                                <p:inputText class="form-control" disabled="#{controllerApp.listaCortes.size()-1 ==cor.idCorte or controllerApp.corteTecnologico?true:false}" maxlength="3" type="number"  value="#{cor.porcentajeCorte}">
+                                                    <p:ajax event="change" update="@widgetVar(lista)" listener="#{controllerApp.validarPorcentajeCortes}"/>
+                                                </p:inputText><br/>
+                                            </div>
+                                        </div>
+                                    </ui:repeat>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </p:panel>
+                <p:commandButton value="Habilitar Campos" 
+                                 onclick="PF('dlg3').show();"  
+                                 oncomplete="PF('dlg3').hide();" 
+                                 rendered="#{controllerApp.mostrarPanel}" 
+                                 styleClass="btn btn-info" 
+                                 action="#{controllerApp.mostrarTablaAction()}" 
+                                 update="toUpdateTable calcular"/>
+            </p:outputPanel>
+
+            <p:outputPanel id="toUpdateTable">
+                <div class="table-responsive">
+                    <p:dataTable var="rowName" class="table table-striped table-bordered table-hover"
+                                 value="#{controllerApp.listaAsignaturas}" 
+                                 rendered="#{controllerApp.mostrarPanel}"  
+                                 widgetVar="tabla" id="tabla" rowIndexVar="rowIdx">
+                        <p:column headerText="" styleClass="ui-widget-header">
+                            <h:outputText value="#{rowName.nombreAsignatura}"/>
+                        </p:column>
+
+                        <p:columns var="columnName" value="#{controllerApp.listaCortes}" headerText="#{columnName.nombreCorte}"
+                                   columnIndexVar="colIdx">
+                            <ui:repeat value="#{controllerApp.objeto.transicion[rowIdx][colIdx]}" var="data">
+                                <p:panel>
+                                    <center>
+                                        <p:inputText   disabled="true"  class="form-control input-double text-center"  rendered="#{controllerApp.mostrarTabla}"  maxlength="4" value="#{data}"></p:inputText>
+                                        <p:inputText id="id#{rowIdx}#{colIdx}" class="form-control input-tabla text-center"  rendered="#{!controllerApp.mostrarTabla}" onblur="validarCampoTabla(this.id)" onkeyup="validarCampoTabla(this.id)"  maxlength="3" value="#{controllerApp.objeto.transicion[rowIdx][colIdx]}"> </p:inputText>
+                                    </center>
+                                </p:panel>
+                            </ui:repeat>
+                        </p:columns>
+                        <p:column rendered="#{controllerApp.mostrarDefinitiva}" headerText="Definitiva" styleClass="ui-widget-header">
+                            <center><label class="label #{controllerApp.objeto.definitiva[rowIdx] >= 3.0 ?'label-success':'label-danger'}"> #{controllerApp.objeto.definitiva[rowIdx]} </label></center>
+                        </p:column>
+
+                    </p:dataTable>
+                </div>
+                <p:commandButton value="Calcular" 
+                                 onclick="PF('dlg3').show();"  
+                                 oncomplete="PF('dlg3').hide();" 
+                                 id="calcular" 
+                                 rendered="#{!controllerApp.mostrarTabla}" 
+                                 styleClass="btn btn-info" 
+                                 actionListener="#{controllerApp.calcular}" 
+                                 update="toUpdateTable"/>
+            </p:outputPanel>
+        </h:form>
+    </ui:define>
+    <ui:define name="bottom">
+        <div class="clearfix text-right">
+            <small>Los campos con <span class="req">*</span> son obligatorios.</small>
+        </div>
+    </ui:define>
+
+</ui:composition>
