@@ -41,16 +41,22 @@
                     document.getElementById(idd).value = valor;
                 }
             }
+            function validarCampoCorte(idd) {
+                var valor = document.getElementById(idd).value;
+                var longitud = valor.length;
+                var pattern = /^([0|1|2|3|4|5|6|7|8|9]){1,3}/;
+                if (!(pattern.test(valor))) {
+                    valor = valor.substr(0, (longitud - 1));
+                    document.getElementById(idd).value = valor;
+                }
+            }
         </script>
         <title>.:App:.</title>
     </h:head>
-
     <h:body>
         <p:dialog header="Ejecutando Acción" widgetVar="dlg3" modal="true"  closable="false" resizable="false" showEffect="bounce" hideEffect="bounce" height="100">
             <img src="../resources/images/loading.gif" alt="Cargando"/>
         </p:dialog>
-
-
         <!--        <div id="top">
                     
                     <ui:insert name="top"></ui:insert>
@@ -166,5 +172,4 @@
         <!-- FOOTER SECTION END-->
 
     </h:body>
-
 </html>
