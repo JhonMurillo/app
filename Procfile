@@ -1,1 +1,1 @@
-web: java -jar target/endorsed/jetty-runner.jar target/*.war
+web:    java $JAVA_OPTS -jar target/endorsed/webapp-runner.jar --port $PORT target/*.war
