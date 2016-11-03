@@ -34,10 +34,10 @@
                             </div>
                             <div class="panel-body">
                                 <label>Cantidad De Asignatura *</label>
-                                <p:inputText id="asi" class="form-control" type="number" onblur="validarCampo(this.id)" onkeyup="validarCampo(this.id)"   maxlength="2" value="#{controllerApp.cantidadAsignaturas}" validatorMessage="No Cumple Con La Expresion">
+                                <p:inputText id="asi" styleClass="form-control" type="number" onblur="validarCampo(this.id)" onkeyup="validarCampo(this.id)"   maxlength="2" value="#{controllerApp.cantidadAsignaturas}" validatorMessage="No Cumple Con La Expresion">
                                 </p:inputText>
                                 <label>Cantidad De Cortes *</label>
-                                <p:inputText id="cor" class="form-control" disabled="#{controllerApp.corteTecnologico}" type="number" onblur="validarCampo(this.id)" onkeyup="validarCampo(this.id)" maxlength="2" value="#{controllerApp.cantidadCortes}">
+                                <p:inputText id="cor" styleClass="form-control" disabled="#{controllerApp.corteTecnologico}" type="number" onblur="validarCampo(this.id)" onkeyup="validarCampo(this.id)" maxlength="2" value="#{controllerApp.cantidadCortes}">
                                 </p:inputText> 
                                 <label>¿Corte Tecnologico?</label>
                                 <p:selectBooleanButton value="#{controllerApp.corteTecnologico}" onLabel="Si" 
@@ -72,7 +72,7 @@
                                         <div class="col-md-4">
                                             <label class="col-md-4 control-label">#{asi.nombreAsignatura}<span class="req">*</span></label>
                                             <div >
-                                                <p:inputText class="form-control" type="number" onblur="validarCampo(this.id)" onkeyup="validarCampo(this.id)" maxlength="2" value="#{asi.cantidadCredito}"/>
+                                                <p:inputText class="form-control"  type="number" onblur="validarCampo(this.id)" onkeyup="validarCampo(this.id)" maxlength="2" value="#{asi.cantidadCredito}"/>
                                             </div>
                                         </div>
                                     </ui:repeat>
@@ -105,7 +105,7 @@
 
             <p:outputPanel id="toUpdateTable">
                 <div class="table-responsive">
-                    <p:dataTable var="rowName" class="table table-striped table-bordered table-hover"
+                    <p:dataTable var="rowName" styleClass="table table-striped table-bordered table-hover"
                                  value="#{controllerApp.listaAsignaturas}" 
                                  rendered="#{controllerApp.mostrarPanel}"  
                                  widgetVar="tabla" id="tabla" rowIndexVar="rowIdx">
@@ -118,8 +118,8 @@
                             <ui:repeat value="#{controllerApp.objeto.transicion[rowIdx][colIdx]}" var="data">
                                 <p:panel>
                                     <center>
-                                        <p:inputText   disabled="true"  class="form-control input-double text-center"  rendered="#{controllerApp.mostrarTabla}"  maxlength="4" value="#{data}"></p:inputText>
-                                        <p:inputText id="id#{rowIdx}#{colIdx}" class="form-control input-tabla text-center"  rendered="#{!controllerApp.mostrarTabla}" onblur="validarCampoTabla(this.id)" onkeyup="validarCampoTabla(this.id)"  maxlength="3" value="#{controllerApp.objeto.transicion[rowIdx][colIdx]}"> </p:inputText>
+                                        <p:inputText   disabled="true"  styleClass="form-control input-double text-center"  rendered="#{controllerApp.mostrarTabla}"  maxlength="4" value="#{data}"></p:inputText>
+                                        <p:inputText id="id#{rowIdx}#{colIdx}" styleClass="form-control input-tabla text-center"  rendered="#{!controllerApp.mostrarTabla}" onblur="validarCampoTabla(this.id)" onkeyup="validarCampoTabla(this.id)"  maxlength="3" value="#{controllerApp.objeto.transicion[rowIdx][colIdx]}"> </p:inputText>
                                     </center>
                                 </p:panel>
                             </ui:repeat>
